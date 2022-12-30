@@ -3,24 +3,36 @@ import Router from "vue-router";
 
 Vue.use(Router);
 
-export default new Router({
+const router =  new Router({
   mode: "history",
   routes: [
     {
       path: "/products/:id",
-      alias: "/products/:id",
+      // alias: "/products/:id",
       name: "product-details",
       component: () => import("./components/Product")
     },
     {
-      path: "/",
-      alias: "/products",
+      path: "/products",
+      // alias: "/products",
       name: "products",
       component: () => import("./components/ProductsList")
     },
     {
+      path: '/login',
+      component: () => import("./components/Login")
+    },
+    {
+      path: '/register',
+      component: () => import("./components/Register")
+    },
+    {
+      path: '/profile',
+      component: () => import("./components/Profile")
+    },
+    {
       path: "/tutorials",
-      alias: "/tutorials",
+      // alias: "/tutorials",
       name: "tutorials",
       component: () => import("./components/TutorialsList")
     },
@@ -36,3 +48,19 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/login', '/register'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (authRequired && !loggedIn) {
+    next('/login');
+  } else {
+    next();
+  }
+});
+
+export default router;
