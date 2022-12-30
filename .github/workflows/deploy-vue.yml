@@ -7,15 +7,15 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  vue-deploy:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@master
-        - uses: actions/setup-node@master
-        - name: Installing project dependencies
-        - run: npm install
-        - name: Building the project
-        - run: npm run build
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - name: Installing project dependencies
+      - run: npm install
+      - name: Building the project
+      - run: npm run build
       - name: Sync
         env:
           dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/vue-crud.zzidzz.tech/public"
@@ -30,16 +30,3 @@ jobs:
             --exclude .env \
             --exclude vendor/ \
             ./dist ${{env.dest}}
-      # - name: install packages
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     key: ${{ secrets.DEPLOY_KEY }}
-      #     port: 22
-      #     script: |
-      #       cd /home/${{ secrets.SSH_USER }}/laravel-api.zzidzz.tech
-      #       composer install
-      #       php artisan migrate
-      #       sudo chown -R $USER:www-data storage
-      #       chmod -R 775 storage
