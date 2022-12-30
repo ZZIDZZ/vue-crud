@@ -18,8 +18,8 @@
       ></v-text-field>
 
       <div v-if="currentUom" class="edit-form py-3" > Uom Id <br>
-        <select v-model="currentUom.uom_name" > 
-          <option v-for="(item, index) in uomOptions" :value="item.uom_name" :key="index">{{ item.id }}</option>
+        <select v-model="currentUomId" > 
+          <option v-for="(item, index) in uomOptions" :value="item.id" :key="index">{{ item.uom_name }}</option>
         </select>
       </div>
       <div v-else>
@@ -85,6 +85,7 @@ export default {
       currentProduct: null,
       uomOptions: [],
       currentUom: null,
+      currentUomId: null,
       message: "",
     };
   },
@@ -104,6 +105,7 @@ export default {
       ProductDataService.getUom(this.currentProduct.uom_id)
         .then((response) => {
           this.currentUom = response.data;
+          this.currentUomId = this.currentUom.id;
           console.log("mantappppp")
           console.log(this.currentUom);
         })
@@ -151,8 +153,13 @@ export default {
     // },
 
     updateProduct() {
+      this.currentProduct.uom_id = this.currentUomId;
       ProductDataService.update(this.currentProduct.id, this.currentProduct)
         .then((response) => {
+          console.log("this.currentProduct.uom_id");
+          console.log(this.currentProduct.uom_id);
+          console.log(this.currentUom.id);
+          console.log(this.currentUomId);
           console.log(response.data);
           this.message = "The product was updated successfully!";
         })
