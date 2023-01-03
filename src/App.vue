@@ -9,11 +9,15 @@
         Tutorials
       </v-btn> -->
       <v-btn to="/products" text>
-        Product List
+        Products
       </v-btn>
-      <v-btn to="/add" text>
-        Add
+      <v-btn to="/buys" text>
+        Buy Orders
       </v-btn>
+      <v-btn to="/sells" text>
+        Sell Orders
+      </v-btn>
+      
       <div v-if="!currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
@@ -29,7 +33,7 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="#" class="nav-link">
+          <router-link to="profile" class="nav-link">
             <font-awesome-icon icon="user" />
             {{ currentUser.email }}
           </router-link>

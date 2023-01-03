@@ -12,8 +12,8 @@
     
     <v-col cols="12" sm="12">
       <v-card class="mx-auto" tile>
-        <v-card-title>Products</v-card-title>
-        <v-btn to="/products/add"  depressed color="primary" text>
+        <v-card-title>Buy Orders</v-card-title>
+        <v-btn to="/sells/add"  depressed color="primary" text>
           Add
         </v-btn>
 
@@ -96,7 +96,7 @@ export default {
     // },
 
     editProduct(id) {
-      this.$router.push({ name: "product-details", params: { id: id } });
+      this.$router.push({ name: "sell-details", params: { id: id } });
     },
 
     deleteProduct(id) {

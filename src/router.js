@@ -7,7 +7,7 @@ const router =  new Router({
   mode: "history",
   routes: [
     {
-      path: "/products/:id",
+      path: "/products/edit/:id",
       // alias: "/products/:id",
       name: "product-details",
       component: () => import("./components/Product")
@@ -17,6 +17,45 @@ const router =  new Router({
       // alias: "/products",
       name: "products",
       component: () => import("./components/ProductsList")
+    },
+    {
+      path: "/products/add",
+      name: "product-add",
+      component: () => import("./components/AddProduct")
+    },
+    {
+      path: "/buys/edit/:id",
+      // alias: "/buys/:id",
+      name: "buy-details",
+      component: () => import("./components/Buy")
+    },
+    {
+      path: "/buys",
+      // alias: "/buys",
+      name: "buys",
+      component: () => import("./components/BuyList")
+    },
+    {
+      path: "/buys/add",
+      name: "buy-add",
+      component: () => import("./components/AddProduct")
+    },
+    {
+      path: "/sells/edit/:id",
+      // alias: "/sells/:id",
+      name: "sell-details",
+      component: () => import("./components/Sell")
+    },
+    {
+      path: "/sells",
+      // alias: "/sells",
+      name: "sells",
+      component: () => import("./components/SellList")
+    },
+    {
+      path: "/sells/add",
+      name: "sell-add",
+      component: () => import("./components/AddProduct")
     },
     {
       path: '/login',
@@ -41,11 +80,7 @@ const router =  new Router({
       name: "tutorial-details",
       component: () => import("./components/Tutorial")
     },
-    {
-      path: "/add",
-      name: "add",
-      component: () => import("./components/AddProduct")
-    }
+    
   ]
 });
 
